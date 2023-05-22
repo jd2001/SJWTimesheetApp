@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV["DATABASE_URL"] %>
   database: SJWTimesheetApp_production
   username: SJWTimesheetApp
   password: <%= ENV["SJWTIMESHEETAPP_DATABASE_PASSWORD"] %>
