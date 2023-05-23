@@ -1,3 +1,8 @@
+databases:
+  - name: timesheet-db
+    plan: free
+    ipAllowList: []
+
 services:
   - type: web
     name: SJWTimesheetApp
@@ -12,3 +17,9 @@ services:
         fromDatabase:
           name: postgres
           property: connectionString
+
+  - type: redis
+    name: timesheet-redis
+    ipAllowList: []
+    plan: free
+    maxmemoryPolicy: noeviction
