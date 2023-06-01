@@ -1,1 +1,8 @@
-<h1>Hello world!</h1>
+<h1>Transactions Index</h1>
+
+<%= link_to 'New transaction', new_transaction_path %>
+
+<% @transactions.each do |t| %>
+  <%= t.cost_per_hour %>
+  <%= t.additional_info %>
+<% end %>

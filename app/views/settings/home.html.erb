@@ -1,0 +1,27 @@
+<h1>Home</h1>
+
+<h2>Billing Types</h2>
+<%= form_for :billing_type, url: billing_types_path(:billing_type), method: :post do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+<% end %>
+<% @billing_types.each do |i| %>
+  <%= i.name %>
+<% end %>
+
+<h2>Clients</h2>
+<%= form_for :client, url: clients_path(:client), method: :post do |f| %>
+  <%= f.text_field :name %>
+  <%= f.submit %>
+<% end %>
+<% @clients.each do |i| %>
+  <%= i.name %>
+  <%= form_for :client_billing_type, url: client_billing_types_path, method: :post do |f| %>
+    <%= f.collection_select(:billing_type_id, BillingType.all, :id, :name) %>
+    <%= f.hidden_field :client_id, value: i.id %>
+    <%= f.submit %>
+  <% end %>
+  <% i.client_billing_types.each do |billing_type| %>
+    <%= billing_type.billing_type.name %>
+  <% end %>
+<% end %>

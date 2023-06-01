@@ -1,0 +1,11 @@
+<%= form_for @transaction do |f| %>
+  <% if @transaction.errors.any? %>
+    <div><%= @transaction.errors.full_messages %></div>
+  <% end %>
+  <%= f.number_field :cost_per_hour %>
+  <%= f.text_field :additional_info %>
+  <%= f.collection_select(:billing_type_id, BillingType.all, :id, :name) %>
+  <%= f.collection_select(:client_id, Client.all, :id, :name) %>
+  <%= f.hidden_field :user_id, value: ApplicationHelper::TEMP_USER_ID %>
+  <%= f.submit %>
+<% end %>

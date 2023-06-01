@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_31_133735) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_01_134704) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -18,6 +18,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_133735) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "client_billing_types", force: :cascade do |t|
+    t.bigint "billing_type_id", null: false
+    t.bigint "client_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["billing_type_id"], name: "index_client_billing_types_on_billing_type_id"
+    t.index ["client_id"], name: "index_client_billing_types_on_client_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -54,6 +63,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_31_133735) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "client_billing_types", "billing_types"
+  add_foreign_key "client_billing_types", "clients"
   add_foreign_key "transactions", "billing_types"
   add_foreign_key "transactions", "clients"
   add_foreign_key "transactions", "users"
