@@ -30,6 +30,12 @@ class TransactionsController < ApplicationController
   end
 
   def destroy
+    @transaction = Transaction.find(params[:id])
+    if @transaction.destroy
+      redirect_to :transactions_path, notice: "Transaction deleted"
+    else
+      redirect_to :transactions_path
+    end
   end
 
   private

@@ -1,4 +1,4 @@
 class Client < ApplicationRecord
-  has_many :billing_types
-  has_many :client_billing_types
+  has_many :transactions, dependent: :destroy
+  has_many :client_billing_types, dependent: :destroy
 end

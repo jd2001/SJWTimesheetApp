@@ -1,27 +1,37 @@
 <h1>Home</h1>
-
+<%= render partial: 'shared/navbar' %>
+<br>
 <h2>Billing Types</h2>
+<br>
 <%= form_for :billing_type, url: billing_types_path(:billing_type), method: :post do |f| %>
   <%= f.text_field :name %>
   <%= f.submit %>
 <% end %>
 <% @billing_types.each do |i| %>
   <%= i.name %>
+  <%= link_to 'Edit', edit_billing_type_path(i.id) %>
+  <%= link_to 'Delete', billing_type_path(i.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+  <br>
 <% end %>
-
+<br>
 <h2>Clients</h2>
 <%= form_for :client, url: clients_path(:client), method: :post do |f| %>
   <%= f.text_field :name %>
   <%= f.submit %>
 <% end %>
+<br>
 <% @clients.each do |i| %>
   <%= i.name %>
+  <%= link_to 'Edit', edit_client_path(i.id) %>
+  <%= link_to 'Delete', client_path(i.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
   <%= form_for :client_billing_type, url: client_billing_types_path, method: :post do |f| %>
     <%= f.collection_select(:billing_type_id, BillingType.all, :id, :name) %>
     <%= f.hidden_field :client_id, value: i.id %>
-    <%= f.submit %>
+    <%= f.submit 'Add billing type' %>
   <% end %>
   <% i.client_billing_types.each do |billing_type| %>
     <%= billing_type.billing_type.name %>
+    <br>
   <% end %>
+  <br>
 <% end %>
