@@ -9,7 +9,6 @@ class ClientBillingTypesController < ApplicationController
   end
 
   def destroy
-
   end
 
   private

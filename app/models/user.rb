@@ -5,4 +5,8 @@ class User < ApplicationRecord
   validates :surname, presence: true
   validates :email, presence: true
   has_many :transactions
+
+  def admin?
+    self.role == 'admin'
+  end
 end
