@@ -4,7 +4,7 @@
 <%= link_to 'New transaction', new_transaction_path %>
 <br>
 <% @transactions.each do |t| %>
-  <%= t.cost_per_hour %>
+  <%= t.hours %>
   <%= t.additional_info %>
   <%= link_to 'Edit', edit_transaction_path(t.id) %>
   <%= link_to 'Delete', transaction_path(t.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>

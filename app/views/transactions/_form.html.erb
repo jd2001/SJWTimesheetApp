@@ -2,7 +2,7 @@
   <% if @transaction.errors.any? %>
     <div><%= @transaction.errors.full_messages %></div>
   <% end %>
-  <%= f.number_field :cost_per_hour %>
+  <%= f.number_field :hours %>
   <%= f.text_field :additional_info %>
   <%= f.collection_select(:billing_type_id, BillingType.all, :id, :name) %>
   <%= f.collection_select(:client_id, Client.all, :id, :name) %>

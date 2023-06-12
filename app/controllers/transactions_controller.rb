@@ -32,15 +32,15 @@ class TransactionsController < ApplicationController
   def destroy
     @transaction = Transaction.find(params[:id])
     if @transaction.destroy
-      redirect_to :transactions_path, notice: "Transaction deleted"
+      redirect_to transactions_path, notice: "Transaction deleted"
     else
-      redirect_to :transactions_path
+      redirect_to transactions_path
     end
   end
 
   private
 
   def transaction_params
-    params.require(:transaction).permit(:additional_info, :cost_per_hour, :billing_type_id, :client_id, :user_id)
+    params.require(:transaction).permit(:additional_info, :cost_per_hour, :hours, :billing_type_id, :client_id, :user_id)
   end
 end
