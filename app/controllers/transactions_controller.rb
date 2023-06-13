@@ -1,6 +1,7 @@
 class TransactionsController < ApplicationController
   def index
     @transactions = Transaction.all
+    @page = 'transactions'
   end
 
   def new
