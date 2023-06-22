@@ -1,8 +1,7 @@
 <%= form_for @client do |f| %>
   <%= f.text_field :name %>
-  <%= f.fields_for :client_billing_type do |i| %>
+  <%= f.fields_for :client_billing_types, ClientBillingType.new do |i| %>
     <%= i.collection_select(:billing_type_id, BillingType.all, :id, :name, {}, { class: 'form-select' }) %>
-    <%= i.hidden_field :client_id, value: i.id %>
   <% end %>
   <%= f.submit %>
 <% end %>

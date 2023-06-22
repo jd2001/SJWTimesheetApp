@@ -3,12 +3,17 @@ class ClientsController < ApplicationController
     @client = Client.new
   end
 
+  def index
+    @page = 'clients'
+    @clients = Client.all
+  end
+
   def create
     @client = Client.new(client_params)
     if @client.save
-      redirect_to home_path, notice: 'Client added'
+      redirect_to clients_path, notice: 'Client added'
     else
-      render home_path, status: :unprocessable_entity
+      render new, status: :unprocessable_entity
     end
   end
 
@@ -37,6 +42,6 @@ class ClientsController < ApplicationController
   private
 
   def client_params
-    params.require(:client).permit(:name)
+    params.require(:client).permit(:name, client_billing_types_attributes: [:billing_type_id])
   end
 end
